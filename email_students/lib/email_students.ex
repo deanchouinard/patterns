@@ -1,4 +1,7 @@
 defmodule EmailStudents do
+  @text_body  "First name: <%= assigns[:f_firstname] %>"
+  @html_body  "<html><%= assigns[:f_firstname] %> </html>"
+  
   def email(file_name) do
     file_name
     |> get_raw_data
@@ -30,22 +33,22 @@ defmodule EmailStudents do
   defp convert_body(assigns) do
     assigns
     |> Enum.into(%{})
-    |> put_in([:text_body], EEx.eval_string(@text_body, assigns:assigns))
-    |> put_in([:html_body], EEx.eval_string(@html_body, assigns:assigns))
+    |> put_in([:text_body], EEx.eval_string(@text_body, assigns: assigns))
+    |> put_in([:html_body], EEx.eval_string(@html_body, assigns: assigns))
+    |> IO.inspect
   end
 
   defp send_email(assigns) do
     assigns
     |> log
-    |> Emailer.Email.send
-    |> Emailer.Mailer.deliver_now
+    |> EmailStudents.Email.send
+    |> EmailStudents.Mailer.deliver_now
     Process.sleep(5000)
   end
 
   defp log(assigns) do
-    IO.puts "Sending to #{assigns.f_name} #{assigns.f_email}"
+    IO.puts "Sending to #{assigns.f_firstname} #{assigns.f_email}"
     assigns
   end
-end
 
 end
