@@ -1,11 +1,24 @@
 defmodule EmailStudentsTest do
   use ExUnit.Case
+  use Bamboo.Test
+
   doctest EmailStudents
 
-  test "email students first test" do
+  test "run code" do
     EmailStudents.email("test/testfile.csv")
 
-    assert true
+    # assert true
+  end
+
+  test "test emailer" do
+
+    assigns = %{ f_first: "Ben", f_email: "ben@test.com",
+      text_body: "Hello Ben", html_body: "Hello Ben" }
+    
+    email = EmailStudents.Email.send(assigns)
+    email = EmailStudents.Mailer.deliver_now(email)
+
+    assert_delivered_email(email)
   end
 
   test "the truth" do
