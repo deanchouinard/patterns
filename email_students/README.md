@@ -2,7 +2,7 @@
 
 **From a Dave Thomas tweet: 12/7/16**
 He comments: Programming by pipeline. Transformative!
-
+[https://pbs.twimg.com/media/CzFetTwVIAAmAkl.png:large]
 
 Rather than just read the code, I took Mr. Thomas's example and filled in some of the details
 to get a working application.
