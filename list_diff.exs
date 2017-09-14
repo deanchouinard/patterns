@@ -32,6 +32,7 @@ defmodule ListDiff do
 
     new_list_b = Enum.reduce(@list_a, [],
       fn(x, acc) -> [match_lists(x, @list_b) | acc] end )
+    |> Enum.reverse()
 
     IO.inspect new_list_b
   end
