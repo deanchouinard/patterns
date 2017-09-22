@@ -10,8 +10,9 @@ defmodule Config do
   end
 
   def get(config, property, default \\ nil) do
-    value = Enum.find(config, fn(%{ prop: p, val: _v} = _x) -> p == property end)
-    case value do
+    # value = Enum.find(config, fn(%{ prop: p, val: _v} = _x) -> p == property end)
+    # value = Enum.find(config, fn(x) -> x.prop == property end)
+    case Enum.find(config, fn(x) -> x.prop == property end) do
       %{prop: _p, val: v} -> v
       nil -> default
     end
